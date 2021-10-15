@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="checkable_default_text_size">16sp</dimen>
+    <dimen name="checkable_default_icon_text_spacing">5dp</dimen>
+    <dimen name="checkable_default_text_button_spacing">5dp</dimen>
+    <dimen name="checkable_default_icon_padding">5dp</dimen>
+    <dimen name="checkable_default_text_padding">5dp</dimen>
+    <dimen name="checkable_icon_default_size">38dp</dimen>
+</resources>

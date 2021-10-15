@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="androidx.appcompat.widget.LinearLayoutCompat">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/selectableIconImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_vertical"
+        tools:layout_height="@dimen/checkable_icon_default_size"
+        tools:layout_width="@dimen/checkable_icon_default_size" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/selectableTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:textColor="?android:textColorPrimary"
+        tools:layout_marginEnd="@dimen/checkable_default_text_button_spacing"
+        tools:layout_marginStart="@dimen/checkable_default_icon_text_spacing"
+        tools:text="Selectable text" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/selectableCheckBoxView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:minWidth="0dp"
+        android:minHeight="0dp" />
+</merge>

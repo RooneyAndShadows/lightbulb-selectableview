@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="SV_checkbox_tag" type="string">checkbox</item>
+    <item name="SV_radio_button_tag" type="string">radioButton</item>
+</resources>

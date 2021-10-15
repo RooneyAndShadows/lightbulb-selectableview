@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CheckBoxView">
+
+        <attr name="CBV_SpacingIcon" format="dimension" />
+        <attr name="CBV_SpacingButton" format="dimension" />
+        <attr name="CBV_Title" format="string" />
+        <attr name="CBV_Checked" format="boolean" />
+        <attr name="CBV_TextSize" format="dimension" />
+        <attr name="CBV_Icon" format="reference" />
+        <attr name="CBV_IconBackground" format="reference" />
+        <attr name="CBV_IconSize" format="dimension" />
+        <attr name="CBV_IconPaddingStart" format="dimension" />
+        <attr name="CBV_IconPaddingTop" format="dimension" />
+        <attr name="CBV_IconPaddingEnd" format="dimension" />
+        <attr name="CBV_IconPaddingBottom" format="dimension" />
+        <attr name="CBV_IconPadding" format="dimension" />
+        <attr name="CBV_IconScaleType">
+            <enum name="matrix" value="0" />
+            <enum name="fitXY" value="1" />
+            <enum name="fitStart" value="2" />
+            <enum name="fitCenter" value="3" />
+            <enum name="fitEnd" value="4" />
+            <enum name="center" value="5" />
+            <enum name="centerCrop" value="6" />
+            <enum name="centerInside" value="7" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RadioButtonView">
+        <attr name="RBV_SpacingIcon" format="dimension" />
+        <attr name="RBV_SpacingButton" format="dimension" />
+        <attr name="RBV_Title" format="string" />
+        <attr name="RBV_Checked" format="boolean" />
+        <attr name="RBV_TextSize" format="dimension" />
+        <attr name="RBV_Icon" format="reference" />
+        <attr name="RBV_IconBackground" format="reference" />
+        <attr name="RBV_IconSize" format="dimension" />
+        <attr name="RBV_IconPaddingStart" format="dimension" />
+        <attr name="RBV_IconPaddingTop" format="dimension" />
+        <attr name="RBV_IconPaddingEnd" format="dimension" />
+        <attr name="RBV_IconPaddingBottom" format="dimension" />
+        <attr name="RBV_IconPadding" format="dimension" />
+        <attr name="RBV_IconScaleType">
+            <enum name="matrix" value="0" />
+            <enum name="fitXY" value="1" />
+            <enum name="fitStart" value="2" />
+            <enum name="fitCenter" value="3" />
+            <enum name="fitEnd" value="4" />
+            <enum name="center" value="5" />
+            <enum name="centerCrop" value="6" />
+            <enum name="centerInside" value="7" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SelectableImageView">
+        <attr name="SIV_DrawableUnselected" format="reference" />
+        <attr name="SIV_DrawableSelected" format="reference" />
+        <attr name="SIV_DrawableTint" format="color" />
+        <attr name="SIV_Checked" format="boolean" />
+        <attr name="SIV_Checkable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SelectableRadioGroup">
+        <attr name="SRG_CheckedId" format="reference" />
+    </declare-styleable>
+</resources>
