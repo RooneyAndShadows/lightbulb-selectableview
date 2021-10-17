@@ -1,4 +1,4 @@
-package com.rands.lightbulb.selectableview;
+package com.github.RooneyAndShadows.lightbulb.selectableview;
 
 import android.content.Context;
 import android.content.res.TypedArray;

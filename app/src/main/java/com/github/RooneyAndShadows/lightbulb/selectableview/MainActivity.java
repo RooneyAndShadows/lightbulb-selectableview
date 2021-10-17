@@ -1,4 +1,4 @@
-package com.rands.lightbulb.selectableview;
+package com.github.RooneyAndShadows.lightbulb.selectableview;
 
 import androidx.appcompat.app.AppCompatActivity;
 

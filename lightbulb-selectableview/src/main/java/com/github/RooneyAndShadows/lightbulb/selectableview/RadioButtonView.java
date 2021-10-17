@@ -1,4 +1,4 @@
-package com.rands.lightbulb.selectableview;
+package com.github.RooneyAndShadows.lightbulb.selectableview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,8 +11,9 @@ import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 
-import com.google.android.material.checkbox.MaterialCheckBox;
-import com.rands.lightbulb.commons.utils.ResourceUtils;
+import com.github.RooneyAndShadows.commons.string.StringUtils;
+import com.google.android.material.radiobutton.MaterialRadioButton;
+import com.github.RooneyAndShadows.lightbulb.commons.utils.ResourceUtils;
 
 import java.util.Arrays;
 
@@ -24,7 +25,7 @@ import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
 @SuppressWarnings("unused")
-public class CheckBoxView extends LinearLayoutCompat {
+public class RadioButtonView extends LinearLayoutCompat {
     private Drawable iconDrawable;
     private Drawable iconBackgroundDrawable;
     private boolean checked;
@@ -35,18 +36,18 @@ public class CheckBoxView extends LinearLayoutCompat {
     private int iconScaleType;
     private String text = "";
     private AppCompatImageView iconView;
-    private MaterialCheckBox checkBox;
+    private MaterialRadioButton radioButton;
     private AppCompatTextView textView;
     private ViewCheckedChangeListener onGroupCheckedListener;
     private ViewCheckedChangeListener onCheckedChangeListener;
     private ViewCheckedChangeListener dataBindingCheckChangeListener;
     private int[] iconPadding;
 
-    public CheckBoxView(Context context) {
+    public RadioButtonView(Context context) {
         this(context, null);
     }
 
-    public CheckBoxView(Context context, AttributeSet attrs) {
+    public RadioButtonView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setSaveEnabled(true);
         readAttributes(context, attrs);
@@ -96,42 +97,42 @@ public class CheckBoxView extends LinearLayoutCompat {
         return iconView;
     }
 
-    @BindingAdapter("CBV_Title")
-    public static void setText(CheckBoxView view, String title) {
+    @BindingAdapter("RBV_Title")
+    public static void setText(RadioButtonView view, String title) {
         view.setViewText(title);
     }
 
-    @BindingAdapter("CBV_Checked")
-    public static void setSelectableChecked(CheckBoxView view, Boolean checked) {
+    @BindingAdapter("RBV_Checked")
+    public static void setSelectableChecked(RadioButtonView view, Boolean checked) {
         if (view.isChecked() != checked)
             view.setCheckedStateInternally(checked);
     }
 
-    @InverseBindingAdapter(attribute = "CBV_Checked", event = "CBV_CheckedAttributeChanged")
-    public static Boolean getSelectableChecked(CheckBoxView view) {
+    @InverseBindingAdapter(attribute = "RBV_Checked", event = "RBV_CheckedAttributeChanged")
+    public static Boolean getSelectableChecked(RadioButtonView view) {
         return view.checked;
     }
 
-    @BindingAdapter("CBV_CheckedAttributeChanged")
-    public static void setListeners(CheckBoxView view, final InverseBindingListener attrChange) {
-        view.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+    @BindingAdapter("RBV_CheckedAttributeChanged")
+    public static void setListeners(RadioButtonView view, final InverseBindingListener attrChange) {
+        view.dataBindingCheckChangeListener = (view1, isChecked) -> {
             if (view.onCheckedChangeListener != null)
                 view.onCheckedChangeListener.execute(view, isChecked);
             attrChange.onChange();
-        });
+        };
     }
 
     private void initViews(Context ctx) {
-        inflate(getContext(), R.layout.checkbox_selectable_view, this);
+        inflate(getContext(), R.layout.radio_selectable_view, this);
         setClickable(true);
         setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP)
-                checkBox.performClick();
+                radioButton.performClick();
             return false;
         });
         iconView = findViewById(R.id.selectableIconImageView);
         textView = findViewById(R.id.selectableTextView);
-        checkBox = findViewById(R.id.selectableCheckBoxView);
+        radioButton = findViewById(R.id.selectableRadioButtonView);
         setupViews();
     }
 
@@ -147,7 +148,6 @@ public class CheckBoxView extends LinearLayoutCompat {
                 .findFirst()
                 .orElse(AppCompatImageView.ScaleType.CENTER_INSIDE);
     }
-
 
     private void setupIconView() {
         LayoutParams textLayoutParams = (LayoutParams) textView.getLayoutParams();
@@ -179,33 +179,31 @@ public class CheckBoxView extends LinearLayoutCompat {
     }
 
     private void setupCheckbox() {
-        checkBox.setChecked(checked);
-        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> setChecked(isChecked));
+        radioButton.setChecked(checked);
+        radioButton.setOnCheckedChangeListener((buttonView, isChecked) -> setChecked(isChecked));
     }
 
     private void readAttributes(Context context, AttributeSet attrs) {
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CheckBoxView, 0, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RadioButtonView, 0, 0);
         try {
-            iconDrawable = a.getDrawable(R.styleable.CheckBoxView_CBV_Icon);
-            iconBackgroundDrawable = a.getDrawable(R.styleable.CheckBoxView_CBV_IconBackground);
-            text = a.getString(R.styleable.CheckBoxView_CBV_Title);
-            if (text == null || text.equals(""))
-                text = "Radio text";
-            checked = a.getBoolean(R.styleable.CheckBoxView_CBV_Checked, false);
-            startIconSize = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_icon_default_size));
-            textSize = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_TextSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_size));
-            startIconSpacing = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_SpacingIcon, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_text_spacing));
-            endButtonSpacing = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_SpacingButton, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_button_spacing));
-            iconScaleType = a.getInt(R.styleable.CheckBoxView_CBV_IconScaleType, AppCompatImageView.ScaleType.CENTER_INSIDE.ordinal());
-            boolean hasGlobalIconPadding = a.hasValue(R.styleable.CheckBoxView_CBV_IconPadding);
+            iconDrawable = a.getDrawable(R.styleable.RadioButtonView_RBV_Icon);
+            iconBackgroundDrawable = a.getDrawable(R.styleable.RadioButtonView_RBV_IconBackground);
+            text = StringUtils.getOrDefault(a.getString(R.styleable.RadioButtonView_RBV_Title), "Radio button");
+            checked = a.getBoolean(R.styleable.RadioButtonView_RBV_Checked, false);
+            startIconSize = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_icon_default_size));
+            textSize = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_TextSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_size));
+            startIconSpacing = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_SpacingIcon, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_text_spacing));
+            endButtonSpacing = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_SpacingButton, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_button_spacing));
+            iconScaleType = a.getInt(R.styleable.RadioButtonView_RBV_IconScaleType, AppCompatImageView.ScaleType.CENTER_INSIDE.ordinal());
+            boolean hasGlobalIconPadding = a.hasValue(R.styleable.RadioButtonView_RBV_IconPadding);
             if (hasGlobalIconPadding) {
-                int textPadding = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPadding, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int textPadding = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPadding, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
                 iconPadding = new int[]{textPadding, textPadding, textPadding, textPadding};
             } else {
-                int left = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPaddingStart, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
-                int top = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPaddingTop, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
-                int right = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPaddingEnd, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
-                int bottom = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPaddingBottom, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int left = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPaddingStart, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int top = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPaddingTop, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int right = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPaddingEnd, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int bottom = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPaddingBottom, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
                 iconPadding = new int[]{left, top, right, bottom};
             }
         } finally {
@@ -222,9 +220,9 @@ public class CheckBoxView extends LinearLayoutCompat {
         if (newValue == checked)
             return;
         checked = newValue;
-        checkBox.setChecked(newValue);
+        radioButton.setChecked(newValue);
         if (onCheckedChangeListener != null)
-            onCheckedChangeListener.execute(this, checked);
+            onCheckedChangeListener.execute(this, newValue);
         if (dataBindingCheckChangeListener != null)
             dataBindingCheckChangeListener.execute(this, checked);
         if (onGroupCheckedListener != null)
@@ -299,6 +297,7 @@ public class CheckBoxView extends LinearLayoutCompat {
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeByte((byte) (isChecked ? 1 : 0));
+
             out.writeInt(textSize);
             out.writeInt(startIconSize);
             out.writeInt(startIconSpacing);
@@ -321,6 +320,6 @@ public class CheckBoxView extends LinearLayoutCompat {
     }
 
     public interface ViewCheckedChangeListener {
-        void execute(CheckBoxView view, boolean isChecked);
+        void execute(RadioButtonView view, boolean isChecked);
     }
 }

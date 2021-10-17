@@ -1,3 +1,3 @@
 rootProject.name = "SelectableView"
 include ':app'
-include ':selectableview'
+include ':lightbulb-selectableview'
