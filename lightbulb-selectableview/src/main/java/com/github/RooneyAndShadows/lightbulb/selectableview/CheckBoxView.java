@@ -1,4 +1,4 @@
-package com.github.RooneyAndShadows.lightbulb.selectableview;
+package com.github.rooneyandshadows.lightbulb.selectableview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,7 +12,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
-import com.github.RooneyAndShadows.lightbulb.commons.utils.ResourceUtils;
+import com.github.rooneyandshadows.lightbulb.commons.utils.ResourceUtils;
 
 import java.util.Arrays;
 

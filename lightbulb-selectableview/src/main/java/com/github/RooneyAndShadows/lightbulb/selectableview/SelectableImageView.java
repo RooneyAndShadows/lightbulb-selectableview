@@ -1,4 +1,4 @@
-package com.github.RooneyAndShadows.lightbulb.selectableview;
+package com.github.rooneyandshadows.lightbulb.selectableview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -12,7 +12,7 @@ import android.util.AttributeSet;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
-import com.github.RooneyAndShadows.lightbulb.commons.utils.ResourceUtils;
+import com.github.rooneyandshadows.lightbulb.commons.utils.ResourceUtils;
 
 import androidx.annotation.ColorInt;
 import androidx.appcompat.widget.AppCompatImageView;

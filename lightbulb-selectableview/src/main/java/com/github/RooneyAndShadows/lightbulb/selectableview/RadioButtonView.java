@@ -1,4 +1,4 @@
-package com.github.RooneyAndShadows.lightbulb.selectableview;
+package com.github.rooneyandshadows.lightbulb.selectableview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,9 +11,9 @@ import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 
-import com.github.RooneyAndShadows.commons.string.StringUtils;
+import com.github.rooneyandshadows.commons.string.StringUtils;
 import com.google.android.material.radiobutton.MaterialRadioButton;
-import com.github.RooneyAndShadows.lightbulb.commons.utils.ResourceUtils;
+import com.github.rooneyandshadows.lightbulb.commons.utils.ResourceUtils;
 
 import java.util.Arrays;
 
