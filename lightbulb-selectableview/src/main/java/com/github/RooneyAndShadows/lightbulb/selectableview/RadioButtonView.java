@@ -11,7 +11,7 @@ import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 
-import com.github.rooneyandshadows.commons.string.StringUtils;
+import com.github.rooneyandshadows.java.commons.string.StringUtils;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.github.rooneyandshadows.lightbulb.commons.utils.ResourceUtils;
 
