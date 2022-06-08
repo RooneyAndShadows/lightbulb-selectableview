@@ -16,6 +16,10 @@
         <attr name="CBV_IconPaddingEnd" format="dimension" />
         <attr name="CBV_IconPaddingBottom" format="dimension" />
         <attr name="CBV_IconPadding" format="dimension" />
+        <attr name="CBV_TextPosition">
+            <enum name="start" value="0" />
+            <enum name="end" value="1" />
+        </attr>
         <attr name="CBV_IconScaleType">
             <enum name="matrix" value="0" />
             <enum name="fitXY" value="1" />
