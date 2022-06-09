@@ -5,22 +5,15 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.github.rooneyandshadows.lightbulb.commons.utils.DrawableUtils;
-import com.google.android.material.checkbox.MaterialCheckBox;
 import com.github.rooneyandshadows.lightbulb.commons.utils.ResourceUtils;
-import com.google.android.material.color.MaterialColors;
-
-import java.util.Arrays;
+import com.google.android.material.checkbox.MaterialCheckBox;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -36,16 +29,14 @@ public class CheckBoxView extends LinearLayoutCompat {
     private boolean checked;
     private int textSize;
     private int startIconSize;
-    private int startIconSpacing;
     private int endButtonSpacing;
     private String text = "";
     private AppCompatImageView iconView;
     private MaterialCheckBox checkBox;
     private AppCompatTextView textView;
     private TextPosition textPosition;
-    private ViewCheckedChangeListener onGroupCheckedListener;
-    private ViewCheckedChangeListener onCheckedChangeListener;
-    private ViewCheckedChangeListener dataBindingCheckChangeListener;
+    private OnCheckedChangeListener onCheckedChangeListener;
+    private OnCheckedChangeListener dataBindingCheckChangeListener;
     private int[] iconPadding;
     private final int CHECKBOX_MARGIN_RIGHT = ResourceUtils.dpToPx(7);
 
@@ -55,16 +46,11 @@ public class CheckBoxView extends LinearLayoutCompat {
 
     public CheckBoxView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setSaveEnabled(true);
         readAttributes(context, attrs);
         initViews(context);
     }
 
-    void setOnGroupCheckedListener(ViewCheckedChangeListener listener) {
-        onGroupCheckedListener = listener;
-    }
-
-    public void setOnCheckedListener(ViewCheckedChangeListener listener) {
+    public void setOnCheckedListener(OnCheckedChangeListener listener) {
         onCheckedChangeListener = listener;
     }
 
@@ -103,7 +89,7 @@ public class CheckBoxView extends LinearLayoutCompat {
         return iconView;
     }
 
-    @BindingAdapter("CBV_Title")
+    @BindingAdapter("CBV_Text")
     public static void setText(CheckBoxView view, String title) {
         view.setViewText(title);
     }
@@ -129,20 +115,13 @@ public class CheckBoxView extends LinearLayoutCompat {
     }
 
     private void initViews(Context ctx) {
+        setSaveEnabled(true);
         setClickable(true);
-        setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_UP)
-                checkBox.performClick();
-            return false;
-        });
-        iconView = new AppCompatImageView(getContext());
-        textView = new AppCompatTextView(getContext());
-        checkBox = new MaterialCheckBox(getContext());
+        setOnClickListener(v -> checkBox.toggle());
         setupViews();
     }
 
     private void setupViews() {
-        removeAllViews();
         LinearLayoutCompat.LayoutParams textParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         LinearLayoutCompat.LayoutParams iconParams = new LayoutParams(startIconSize, startIconSize);
         LinearLayoutCompat.LayoutParams checkboxParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -150,6 +129,10 @@ public class CheckBoxView extends LinearLayoutCompat {
         checkboxParams.gravity = Gravity.CENTER_VERTICAL;
         textParams.gravity = Gravity.CENTER_VERTICAL;
         textParams.weight = 1;
+        removeAllViews();
+        iconView = new AppCompatImageView(getContext());
+        textView = new AppCompatTextView(getContext());
+        checkBox = new MaterialCheckBox(getContext());
         checkBox.setMinimumWidth(0);
         checkBox.setMinWidth(0);
         switch (textPosition) {
@@ -189,7 +172,6 @@ public class CheckBoxView extends LinearLayoutCompat {
         textView.setText(text);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         textView.setClickable(false);
-        MaterialColors.getColor(this,android.R.attr.textColorSecondary);
         textView.setIncludeFontPadding(false);
         LayoutParams params = (LayoutParams) textView.getLayoutParams();
         if (textPosition.equals(TextPosition.START)) {
@@ -212,13 +194,12 @@ public class CheckBoxView extends LinearLayoutCompat {
         try {
             iconDrawable = a.getDrawable(R.styleable.CheckBoxView_CBV_Icon);
             iconBackgroundDrawable = a.getDrawable(R.styleable.CheckBoxView_CBV_IconBackground);
-            text = a.getString(R.styleable.CheckBoxView_CBV_Title);
+            text = a.getString(R.styleable.CheckBoxView_CBV_Text);
             if (text == null || text.equals(""))
                 text = "Radio text";
             checked = a.getBoolean(R.styleable.CheckBoxView_CBV_Checked, false);
             startIconSize = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_icon_default_size));
             textSize = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_TextSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_size));
-            startIconSpacing = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_SpacingIcon, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_text_spacing));
             endButtonSpacing = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_SpacingButton, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_button_spacing));
             textPosition = TextPosition.valueOf(a.getInt(R.styleable.CheckBoxView_CBV_TextPosition, TextPosition.START.value));
             boolean hasGlobalIconPadding = a.hasValue(R.styleable.CheckBoxView_CBV_IconPadding);
@@ -251,8 +232,6 @@ public class CheckBoxView extends LinearLayoutCompat {
             onCheckedChangeListener.execute(this, checked);
         if (dataBindingCheckChangeListener != null)
             dataBindingCheckChangeListener.execute(this, checked);
-        if (onGroupCheckedListener != null)
-            onGroupCheckedListener.execute(this, newValue);
     }
 
     @Override
@@ -272,7 +251,6 @@ public class CheckBoxView extends LinearLayoutCompat {
         myState.isChecked = checked;
         myState.textSize = textSize;
         myState.startIconSize = startIconSize;
-        myState.startIconSpacing = startIconSpacing;
         myState.textPosition = textPosition.value;
         myState.buttonSpacing = endButtonSpacing;
         myState.title = text;
@@ -286,7 +264,6 @@ public class CheckBoxView extends LinearLayoutCompat {
         checked = savedState.isChecked;
         textSize = savedState.textSize;
         startIconSize = savedState.startIconSize;
-        startIconSpacing = savedState.startIconSpacing;
         endButtonSpacing = savedState.buttonSpacing;
         textPosition = TextPosition.valueOf(savedState.textPosition);
         text = savedState.title;
@@ -296,7 +273,6 @@ public class CheckBoxView extends LinearLayoutCompat {
     private static class SavedState extends BaseSavedState {
         private boolean isChecked;
         private int textSize;
-        private int startIconSpacing;
         private int buttonSpacing;
         private int startIconSize;
         private int textPosition;
@@ -312,7 +288,6 @@ public class CheckBoxView extends LinearLayoutCompat {
             isChecked = in.readByte() != 0;
             textSize = in.readInt();
             startIconSize = in.readInt();
-            startIconSpacing = in.readInt();
             buttonSpacing = in.readInt();
             textPosition = in.readInt();
             title = in.readString();
@@ -325,7 +300,6 @@ public class CheckBoxView extends LinearLayoutCompat {
             out.writeByte((byte) (isChecked ? 1 : 0));
             out.writeInt(textSize);
             out.writeInt(startIconSize);
-            out.writeInt(startIconSpacing);
             out.writeInt(buttonSpacing);
             out.writeInt(textPosition);
             out.writeString(title);
@@ -370,7 +344,7 @@ public class CheckBoxView extends LinearLayoutCompat {
         }
     }
 
-    public interface ViewCheckedChangeListener {
+    public interface OnCheckedChangeListener {
         void execute(CheckBoxView view, boolean isChecked);
     }
 }
