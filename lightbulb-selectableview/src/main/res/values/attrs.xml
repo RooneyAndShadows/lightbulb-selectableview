@@ -33,10 +33,11 @@
     </declare-styleable>
 
     <declare-styleable name="RadioButtonView">
-        <attr name="RBV_SpacingIcon" format="dimension" />
-        <attr name="RBV_SpacingButton" format="dimension" />
-        <attr name="RBV_Title" format="string" />
+        <attr name="RBV_TextSpacing" format="dimension" />
+        <attr name="RBV_Text" format="string" />
+        <attr name="RBV_ErrorText" format="string" />
         <attr name="RBV_Checked" format="boolean" />
+        <attr name="RBV_ValidationEnabled" format="boolean" />
         <attr name="RBV_TextSize" format="dimension" />
         <attr name="RBV_Icon" format="reference" />
         <attr name="RBV_IconBackground" format="reference" />
@@ -46,6 +47,10 @@
         <attr name="RBV_IconPaddingEnd" format="dimension" />
         <attr name="RBV_IconPaddingBottom" format="dimension" />
         <attr name="RBV_IconPadding" format="dimension" />
+        <attr name="RBV_TextPosition">
+            <enum name="start" value="0" />
+            <enum name="end" value="1" />
+        </attr>
         <attr name="RBV_IconScaleType">
             <enum name="matrix" value="0" />
             <enum name="fitXY" value="1" />

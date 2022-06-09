@@ -270,27 +270,27 @@ public class RadioButtonView extends LinearLayoutCompat {
     }
 
     private void readAttributes(Context context, AttributeSet attrs) {
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CheckBoxView, 0, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RadioButtonView, 0, 0);
         try {
-            icon = a.getDrawable(R.styleable.CheckBoxView_CBV_Icon);
-            iconBackground = a.getDrawable(R.styleable.CheckBoxView_CBV_IconBackground);
-            text = StringUtils.getOrDefault(a.getString(R.styleable.CheckBoxView_CBV_Text), "Text");
-            errorText = a.getString(R.styleable.CheckBoxView_CBV_ErrorText);
-            checked = a.getBoolean(R.styleable.CheckBoxView_CBV_Checked, false);
-            validationEnabled = a.getBoolean(R.styleable.CheckBoxView_CBV_ValidationEnabled, false);
-            startIconSize = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_icon_default_size));
-            textSize = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_TextSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_size));
-            textSpacing = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_TextSpacing, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_button_spacing));
-            textPosition = TextPosition.valueOf(a.getInt(R.styleable.CheckBoxView_CBV_TextPosition, TextPosition.START.value));
-            boolean hasGlobalIconPadding = a.hasValue(R.styleable.CheckBoxView_CBV_IconPadding);
+            icon = a.getDrawable(R.styleable.RadioButtonView_RBV_Icon);
+            iconBackground = a.getDrawable(R.styleable.RadioButtonView_RBV_IconBackground);
+            text = StringUtils.getOrDefault(a.getString(R.styleable.RadioButtonView_RBV_Text), "Text");
+            errorText = a.getString(R.styleable.RadioButtonView_RBV_ErrorText);
+            checked = a.getBoolean(R.styleable.RadioButtonView_RBV_Checked, false);
+            validationEnabled = a.getBoolean(R.styleable.RadioButtonView_RBV_ValidationEnabled, false);
+            startIconSize = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_icon_default_size));
+            textSize = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_TextSize, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_size));
+            textSpacing = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_TextSpacing, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_text_button_spacing));
+            textPosition = TextPosition.valueOf(a.getInt(R.styleable.RadioButtonView_RBV_TextPosition, TextPosition.START.value));
+            boolean hasGlobalIconPadding = a.hasValue(R.styleable.RadioButtonView_RBV_IconPadding);
             if (hasGlobalIconPadding) {
-                int textPadding = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPadding, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int textPadding = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPadding, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
                 iconPadding = new int[]{textPadding, textPadding, textPadding, textPadding};
             } else {
-                int left = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPaddingStart, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
-                int top = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPaddingTop, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
-                int right = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPaddingEnd, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
-                int bottom = a.getDimensionPixelSize(R.styleable.CheckBoxView_CBV_IconPaddingBottom, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int left = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPaddingStart, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int top = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPaddingTop, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int right = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPaddingEnd, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
+                int bottom = a.getDimensionPixelSize(R.styleable.RadioButtonView_RBV_IconPaddingBottom, ResourceUtils.getDimenPxById(context, R.dimen.checkable_default_icon_padding));
                 iconPadding = new int[]{left, top, right, bottom};
             }
         } finally {
