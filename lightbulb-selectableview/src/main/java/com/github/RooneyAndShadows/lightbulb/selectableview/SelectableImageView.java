@@ -29,9 +29,9 @@ public class SelectableImageView extends AppCompatImageView {
     private int drawableTint;
     private ObjectAnimator oa1;
     private ObjectAnimator oa2;
-    private ViewCheckedChangeListener onGroupCheckedListener;
-    private ViewCheckedChangeListener onCheckedChangeListener;
-    private ViewCheckedChangeListener dataBindingCheckChangeListener;
+    private OnCheckedChangeListener onGroupCheckedListener;
+    private OnCheckedChangeListener onCheckedChangeListener;
+    private OnCheckedChangeListener dataBindingCheckChangeListener;
 
     public SelectableImageView(Context context, AttributeSet attr) {
         super(context, attr);
@@ -43,11 +43,11 @@ public class SelectableImageView extends AppCompatImageView {
         this(context, null);
     }
 
-    void setOnGroupCheckedListener(ViewCheckedChangeListener listener) {
+    void setOnGroupCheckedListener(OnCheckedChangeListener listener) {
         onGroupCheckedListener = listener;
     }
 
-    public void setOnCheckedListener(ViewCheckedChangeListener listener) {
+    public void setOnCheckedListener(OnCheckedChangeListener listener) {
         this.onCheckedChangeListener = listener;
     }
 
@@ -260,7 +260,7 @@ public class SelectableImageView extends AppCompatImageView {
         };
     }
 
-    public interface ViewCheckedChangeListener {
+    public interface OnCheckedChangeListener {
         void execute(SelectableImageView view, boolean isChecked);
     }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ErrorTextAppearance" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">@dimen/checkable_error_text_size</item>
+        <item name="android:textColor">?colorError</item>
+    </style>
+</resources>

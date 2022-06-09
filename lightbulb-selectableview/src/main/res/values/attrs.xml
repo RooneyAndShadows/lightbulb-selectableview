@@ -2,9 +2,11 @@
 <resources>
 
     <declare-styleable name="CheckBoxView">
-        <attr name="CBV_SpacingButton" format="dimension" />
+        <attr name="CBV_TextSpacing" format="dimension" />
         <attr name="CBV_Text" format="string" />
+        <attr name="CBV_ErrorText" format="string" />
         <attr name="CBV_Checked" format="boolean" />
+        <attr name="CBV_ValidationEnabled" format="boolean" />
         <attr name="CBV_TextSize" format="dimension" />
         <attr name="CBV_Icon" format="reference" />
         <attr name="CBV_IconBackground" format="reference" />

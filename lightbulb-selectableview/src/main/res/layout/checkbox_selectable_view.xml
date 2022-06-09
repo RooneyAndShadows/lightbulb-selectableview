@@ -30,7 +30,7 @@
             android:textColor="?android:textColorPrimary"
             tools:text="Selectable text" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/selectableCheckableView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
