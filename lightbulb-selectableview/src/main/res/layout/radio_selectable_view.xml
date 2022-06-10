@@ -5,7 +5,7 @@
     tools:parentTag="androidx.appcompat.widget.LinearLayoutCompat">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/checkboxWrapper"
+        android:id="@+id/radioButtonWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
