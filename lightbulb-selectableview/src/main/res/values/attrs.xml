@@ -3,10 +3,12 @@
 
     <declare-styleable name="CheckBoxView">
         <attr name="CBV_TextSpacing" format="dimension" />
+        <attr name="CBV_IconSpacing" format="dimension" />
         <attr name="CBV_Text" format="string" />
         <attr name="CBV_ErrorText" format="string" />
         <attr name="CBV_Checked" format="boolean" />
         <attr name="CBV_ValidationEnabled" format="boolean" />
+        <attr name="CBV_Enabled" format="boolean" />
         <attr name="CBV_TextSize" format="dimension" />
         <attr name="CBV_Icon" format="reference" />
         <attr name="CBV_IconBackground" format="reference" />
@@ -34,10 +36,12 @@
 
     <declare-styleable name="RadioButtonView">
         <attr name="RBV_TextSpacing" format="dimension" />
+        <attr name="RBV_IconSpacing" format="dimension" />
         <attr name="RBV_Text" format="string" />
         <attr name="RBV_ErrorText" format="string" />
         <attr name="RBV_Checked" format="boolean" />
         <attr name="RBV_ValidationEnabled" format="boolean" />
+        <attr name="RBV_Enabled" format="boolean" />
         <attr name="RBV_TextSize" format="dimension" />
         <attr name="RBV_Icon" format="reference" />
         <attr name="RBV_IconBackground" format="reference" />
